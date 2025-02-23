@@ -84,7 +84,9 @@ Install them using your package manager:
 ```bash
 sudo apt install qtile rofi dunst picom feh nitrogen
 ```
-
+```bash
+sudo pacman -Syu qtile rofi dunst picom feh nitrogen
+```
 ---
 
 ## Contributing
