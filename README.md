@@ -1,104 +1,130 @@
-# Qtile Window Manager Configuration
+# Qtile Configuration
 
-Welcome to my Qtile configuration repository! This repository contains my personal configuration files for the [Qtile](http://www.qtile.org/) tiling window manager, a highly customizable and extensible window manager written in Python. Whether you're new to Qtile or an experienced user, feel free to explore, use, and modify these configurations to suit your needs.
-
-## Table of Contents
-- [Introduction](#introduction)
-- [Features](#features)
-- [Installation](#installation)
-- [Customization](#customization)
-- [Screenshots](#screenshots)
-- [Dependencies](#dependencies)
-- [Contributing](#contributing)
-- [License](#license)
-
----
-
-## Introduction
-
-[Qtile](http://www.qtile.org/) is a dynamic, hackable tiling window manager written and configured in Python. This repository houses my personal Qtile configuration files, designed to provide a clean, efficient, and visually appealing desktop environment. The configuration is modular and easy to extend, making it a great starting point for your own setup.
-
----
-
-## Features
-
-- **Custom Keybindings**: Optimized keybindings for productivity and ease of use.
-- **Theming**: Includes a custom color scheme and styling for the bar and widgets.
-- **Workspace Management**: Predefined workspaces for better organization.
-- **Integration with External Tools**: Configurations for tools like `rofi`, `dunst`, `picom`, and more.
-- **Autostart Scripts**: Automatically launch essential applications and services on startup.
-- **Modular Structure**: Easy to customize and extend using Python.
-
----
-
-## Installation
-
-### Prerequisites
-- Qtile installed on your system.
-- Python 3.x installed.
-- Basic dependencies like `rofi`, `dunst`, and `picom`.
-
-### Steps
-1. Clone this repository to your local machine:
-   ```bash
-   git clone https://github.com/KAPINTOM/my-qtile-config-file.git ~/.config/qtile
-   ```
-2. Backup your existing Qtile configuration (if any):
-   ```bash
-   mv ~/.config/qtile/config.py ~/.config/qtile/config.py.backup
-   ```
-3. Copy the configuration files to your Qtile directory:
-   ```bash
-   cp -r ~/.config/qtile/* ~/.config/qtile/
-   ```
-4. Restart Qtile to apply the new configuration:
-   ```bash
-   qtile cmd-obj -o cmd -f restart
-   ```
-
----
-
-## Customization
-
-This configuration is designed to be modular and easy to customize. Here are some tips:
-
-- **Keybindings**: Edit the `~/.config/qtile/config.py` file to modify or add keybindings.
-- **Theming**: Adjust colors and styles in the `~/.config/qtile/theme.py` file.
-- **Autostart**: Add or remove applications in the `~/.config/qtile/autostart.sh` script.
-- **Bar and Widgets**: Customize the bar and widgets in the `~/.config/qtile/bars.py` file.
-
----
+A highly customized Qtile window manager configuration with system monitoring, custom keybindings, and autostart applications.
 
 ## Dependencies
 
-This configuration relies on several external tools and utilities. Ensure you have the following installed:
+Install these packages using your distribution's package manager:
 
-- **Qtile**: The window manager itself.
-- **rofi**: Application launcher.
-- **dunst**: Notification daemon.
-- **picom**: Compositor for transparency and shadows.
-- **feh**: Wallpaper manager.
-- **nitrogen** (optional): Alternative wallpaper manager.
-
-Install them using your package manager:
+### Core Dependencies
 ```bash
-sudo apt install qtile rofi dunst picom feh nitrogen
+# Window Manager
+qtile                  # The window manager itself
+python-psutil         # For system monitoring widgets
+picom                 # Compositor for transparency effects
+nitrogen             # Wallpaper manager
+network-manager-applet # Network management tray icon (nm-applet)
+volumeicon           # Volume control tray icon
+brightnessctl       # Brightness control utility
+rofi                # Application launcher
+
+# Audio Control
+alsa-utils          # For amixer volume control
+
+# Optional but recommended
+acpi                # For battery monitoring
+python-dbus        # For various system integrations
 ```
+
+## Features
+
+### Window Management
+
+#### Basic Controls
+- **Super + Arrow Keys**: Navigate between windows
+- **Super + Space**: Cycle through windows
+- **Super + Shift + Arrow Keys**: Move windows within layout
+- **Super + Control + Arrow Keys**: Resize windows
+- **Super + N**: Reset window sizes to default
+
+#### Layout Controls
+- **Super + Tab**: Cycle through layouts
+- **Super + Shift + Return**: Toggle split/unsplit in stack layout
+- **Super + F**: Toggle fullscreen
+- **Super + T**: Toggle floating mode
+
+#### Window Actions
+- **Super + Q**: Close focused window
+- **Super + Control + R**: Reload Qtile config
+- **Super + Control + Q**: Shutdown Qtile
+
+### Workspaces
+- **Super + [1-9]**: Switch to workspace 1-9
+- **Super + Shift + [1-9]**: Move window to workspace 1-9
+
+### Applications
+- **Super + Return**: Launch terminal
+- **Super + E**: Launch Rofi application menu
+- **Super + W**: Launch Rofi window switcher
+
+### System Controls
+- **XF86AudioRaiseVolume**: Volume up
+- **XF86AudioLowerVolume**: Volume down
+- **XF86AudioMute**: Toggle mute
+- **XF86MonBrightnessUp**: Brightness up
+- **XF86MonBrightnessDown**: Brightness down
+
+## Layouts
+1. **Columns**: Main layout with red borders (#ff0000) and black normal borders
+2. **Max**: Maximized layout with red borders
+3. **Matrix**: Grid-based layout with similar border configuration
+
+## Status Bar
+
+The bottom bar includes:
+- Current layout indicator
+- Workspace indicators with line highlighting
+- Window name (dark gray background)
+- Network usage monitor (blue background)
+- CPU usage monitor (orange background)
+- CPU temperature sensor
+- Memory usage percentage (green background)
+- Memory usage in MB (green background)
+- System tray (purple background)
+- Volume widget (purple background)
+- Clock (Bogota timezone)
+- Quick exit button
+
+## Autostart Applications
+
+The following applications start automatically:
 ```bash
-sudo pacman -Syu qtile rofi dunst picom feh nitrogen
+picom               # Compositor
+nitrogen           # Wallpaper restoration
+nm-applet          # Network manager applet
+volumeicon         # Volume control icon
 ```
----
 
-## Contributing
+## Configuration Files
 
-Contributions are welcome! If you have suggestions, improvements, or bug fixes, feel free to open an issue or submit a pull request. Please ensure your changes align with the overall design and functionality of the configuration.
+### Main Configuration
+- **Location**: `~/.config/qtile/config.py`
+- **Contents**: All window manager settings, keybindings, and layouts
 
----
+### Autostart Script
+- **Location**: `~/.config/qtile/autostart.sh`
+- **Permissions**: Make sure it's executable (`chmod +x autostart.sh`)
 
-## License
+## Additional Settings
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+### Mouse Behavior
+- Focus follows mouse
+- Floating windows stay above
+- Cursor warping disabled
+- Click to focus without raising window
 
----
+### Floating Window Rules
+Predefined rules for:
+- Dialog windows
+- Git GUI tools
+- SSH password prompts
+- GPG password entry
 
-Enjoy your Qtile experience! If you have any questions or need assistance, feel free to reach out.
+### Display Settings
+- Auto fullscreen enabled
+- Smart focus on window activation
+- Automatic screen reconfiguration
+- X11 cursor size: 24px
+
+## Java Application Compatibility
+The window manager identifies itself as "LG3D" for compatibility with Java applications.
