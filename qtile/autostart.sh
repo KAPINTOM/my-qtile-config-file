@@ -1,8 +1,8 @@
 #!/bin/bash
 
-picom &
+#picom &
 nitrogen --restore &
 nm-applet &
-pkill -f volumeicon
-sleep 1
-volumeicon &
+#pkill -f volumeicon
+#sleep 1
+#volumeicon &

@@ -50,7 +50,7 @@ volmute = "XF86AudioMute"
 
 @hook.subscribe.startup
 def autostart():
-    home = os.path.expanduser("/home/venuz-primorosa/.config/qtile/autostart.sh")
+    home = os.path.expanduser("/home/kapm/.config/qtile/autostart.sh")
     subprocess.call(home)
 
 
@@ -188,9 +188,9 @@ for i in groups:
 
 layouts = [
     layout.Columns(
-        border_focus=["#ff0000"], border_normal=["#000000"], border_width=5, margin=5
+        border_focus=["#ff0000"], border_normal=["#000000"], border_width=3, margin=1
     ),
-    layout.Max(border_focus=["#ff0000"], border_width=5, margin=5),
+    layout.Max(border_focus=["#ff0000"], border_width=0, margin=0),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -233,14 +233,14 @@ screens = [
                 # widget.TextBox("default config", name="default"),
                 # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
+                #widget.StatusNotifier(),
                 # widget.backlight(),
                 # widget.CPUGraph(**widget_defaults),
                 # widget.graph.MemoryGraph(**widget_defaults),
                 # widget.graph.NetGraph(**widget_defaults),
-                # widget.BatteryIcon(**widget_defaults),
-                # widget.systray(all),
-                # widget.pulse_volume(**widget_defaults),
+                #widget.BatteryIcon(**widget_defaults),
+                #widget.systray(all),
+                #widget.pulse_volume(**widget_defaults),
                 # widget.Wlan(),
                 widget.TextBox("NET ➤"),
                 widget.Net(
@@ -255,6 +255,8 @@ screens = [
                 widget.TextBox("MEM ➤"),
                 widget.Memory(format='{MemPercent: .0f}', update_interval=2, background="#008033"),
                 widget.Memory(measure_mem="M", update_interval=2, background="#008033"),
+                widget.TextBox("BATT ➤"),
+                widget.Battery(**widget_defaults, background="#6a369e"),
                 widget.Systray(background="#2a0033"),
                 widget.Volume(background="#2a0033"),
                 widget.Clock(format="%d/%m/%y %H:%M", timezone="America/Bogota"),
