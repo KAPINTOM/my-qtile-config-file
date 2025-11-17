@@ -13,13 +13,21 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile import hook
+from libqtile.backend.wayland import InputConfig
 
+
+if qtile.core.name == "x11":
+    term = "kitty"  # For X11
+elif qtile.core.name == "wayland":
+    term = "kitty"   # For Wayland (or use 'alacritty', 'kitty')
+
+    
 # =============================================
 # CONFIGURACIÓN DE TECLAS MODIFICADORAS
 # =============================================
 
 mod = "mod4"  # Tecla Super/Windows
-terminal = guess_terminal()  # Terminal por defecto del sistema
+terminal = "kitty"  # Terminal por defecto del sistema
 
 # Definición de teclas especiales para funciones del sistema
 
