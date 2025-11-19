@@ -13,15 +13,7 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile import hook
-from libqtile.backend.wayland import InputConfig
 
-
-if qtile.core.name == "x11":
-    term = "kitty"  # For X11
-elif qtile.core.name == "wayland":
-    term = "kitty"   # For Wayland (or use 'alacritty', 'kitty')
-
-    
 # =============================================
 # CONFIGURACIÓN DE TECLAS MODIFICADORAS
 # =============================================
@@ -49,7 +41,8 @@ colors = {
     "warning": "#d79921",
     "error": "#cc241d",
     "success": "#98971a",
-    "gray": "#3c3836"
+    "gray": "#3c3836",
+    "white":"#ffffff",
 }
 
 # =============================================
@@ -67,6 +60,7 @@ def autostart():
 # =============================================
 
 keys = [
+    
     # ========== NAVEGACIÓN ENTRE VENTANAS ==========
 
     Key([mod], "left", lazy.layout.left(), desc="Move focus to left"),
@@ -92,7 +86,7 @@ keys = [
     
     # ========== DISPOSICIÓN DE VENTANAS ==========
 
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
+    #Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     
     # ========== MENÚ PERSONALIZADO DE ENERGÍA ==========
@@ -108,15 +102,23 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     
-    # ========== KEYBINDINGS PERSONALIZADOS KAPM1001 ==========
+    # ========== KEYBINDINGS PERSONALIZADOS KAPM ==========
 
     Key([mod], "e", lazy.spawn("rofi -i -show drun -modi drun -show-icons"), desc="Lanzador rofi"),
     Key([mod], "w", lazy.spawn("rofi -i -show window -modi drun -show-icons"), desc="Lanzador rofi ventanas"),
     Key([], brightup, lazy.spawn("brightnessctl set 10%+"), desc="Subir brillo"),
     Key([], brightdown, lazy.spawn("brightnessctl set 10%-"), desc="Bajar brillo"),
-    Key([], volup, lazy.spawn("amixer -D 'default' sset Master 10%+"), desc="Subir volumen"),
-    Key([], voldown, lazy.spawn("amixer -D 'default' sset Master 10%-"), desc="Bajar volumen"),
-    Key([], volmute, lazy.spawn("amixer -D 'default' sset Master toggle"), desc="Mute"),
+
+    # ========== VOLUME KEYBINDINGS ==========
+
+    #Key([], volup, lazy.spawn("amixer -D 'default' sset Master 10%+"), desc="Subir volumen"),
+    #Key([], voldown, lazy.spawn("amixer -D 'default' sset Master 10%-"), desc="Bajar volumen"),
+    #Key([], volmute, lazy.spawn("amixer -D 'default' sset Master toggle"), desc="Mute"),
+    
+    Key([], volup, lazy.spawn("amixer -D 'default:2' sset Headphone 5%+"), desc="Subir volumen"),
+    Key([], voldown, lazy.spawn("amixer -D 'default:2' sset Headphone 5%-"), desc="Bajar volumen"),
+    Key([], volmute, lazy.spawn("amixer -D 'default:2' sset Headphone toggle"), desc="Mute"),
+
 ]
 
 # =============================================
@@ -174,7 +176,7 @@ layouts = [
 # Configuración por defecto para widgets
 
 widget_defaults = dict(
-    font="Cascadia Code NF Bold Italic",
+    font="CaskaydiaCove Nerd Font Bold",
     fontsize=15,
     padding=6,
     background=colors["background"],
@@ -186,7 +188,7 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        bottom=bar.Bar(
+        top=bar.Bar(
             [
 
                 # Widget de layout actual
@@ -197,9 +199,9 @@ screens = [
                 # Widget de grupos de trabajo
 
                 widget.GroupBox(
-                    highlight_method="line",
-                    highlight_color=[colors["primary"], colors["gray"]],
-                    this_current_screen_border=colors["primary"],
+                    highlight_method="text",
+                    highlight_color=[colors["primary"]],
+                    this_current_screen_border=colors["white"],
                     this_screen_border=colors["gray"],
                     other_current_screen_border=colors["gray"],
                     other_screen_border=colors["gray"],
@@ -215,7 +217,7 @@ screens = [
                 
                 # Widget de nombre de ventana
 
-                widget.WindowName(foreground=colors["primary"], max_chars=60, padding=10),
+                widget.WindowName(foreground=colors["primary"], padding=10),
                 widget.Sep(linewidth=0, padding=10, foreground=colors["gray"], background=colors["background"]),
                 
                 # ========== WIDGETS DEL SISTEMA ==========
@@ -241,7 +243,7 @@ screens = [
                 # Volumen
 
                 widget.TextBox(text="VOL →", foreground=colors["primary"], padding=0),
-                widget.Volume(foreground=colors["foreground"], padding=5),
+                widget.Volume(foreground=colors["foreground"], padding=5, device='default:2', channel='Headphone'),
                 widget.Sep(linewidth=0, padding=5, foreground=colors["gray"], background=colors["background"]),
                 
                 # Batería
@@ -255,19 +257,26 @@ screens = [
                 widget.Systray(icon_size=16, padding=5),
                 widget.Sep(linewidth=0, padding=5, foreground=colors["gray"], background=colors["background"]),
                 
-                # Reloj
+                # Fecha
 
-                widget.TextBox(text="TIME →", foreground=colors["warning"], padding=0),
-                widget.Clock(format="%d/%m/%y %H:%M", timezone="America/Bogota", foreground=colors["foreground"], padding=5),
+                widget.TextBox(text="DATE →", foreground=colors["warning"], padding=0),
+                widget.Clock(format="%d/%m/%y", timezone="America/Bogota", foreground=colors["warning"], padding=5),
                 widget.Sep(linewidth=0, padding=5, foreground=colors["gray"], background=colors["background"]),
                 
+                # Hora
+
+                widget.TextBox(text="TIME →", foreground=colors["white"], padding=0),
+                widget.Clock(format="%H:%M", timezone="America/Bogota", foreground=colors["white"], padding=5),
+                widget.Sep(linewidth=0, padding=5, foreground=colors["gray"], background=colors["background"]),
+
                 # Botón de salida rápida
                 #widget.QuickExit(foreground=colors["error"], padding=10),
+
             ],
-            18,  # Altura de la barra
+            20,  # Altura de la barra
             background=colors["background"],
             margin=[0, 0, 0, 0],  # Sin márgenes
-            opacity=0.95,
+            opacity=1,
         ),
     ),
 ]
