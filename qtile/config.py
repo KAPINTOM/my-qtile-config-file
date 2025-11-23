@@ -138,6 +138,7 @@ keys = [
     'maim /home/kapm/Screenshots/screenshot-$(date +\'%Y-%m-%d-%H%M%S\').png',
     shell=True)),
 
+
     # Brightness
     Key([], brightup, lazy.spawn("brightnessctl set 10%+"), desc="Subir brillo"),
     Key([], brightdown, lazy.spawn("brightnessctl set 10%-"), desc="Bajar brillo"),
@@ -328,7 +329,7 @@ floating_layout = layout.Floating(
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
-auto_minimize = True
+auto_minimize = False
 
 # Wayland-specific fallbacks (set to None to use defaults)
 wl_input_rules = None
