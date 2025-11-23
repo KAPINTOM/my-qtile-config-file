@@ -133,6 +133,12 @@ keys = [
     Key([mod], "e", lazy.spawn("rofi -i -show drun -modi drun -show-icons"), desc="Lanzador rofi"),
     Key([mod], "w", lazy.spawn("rofi -i -show window -modi drun -show-icons"), desc="Lanzador rofi ventanas"),
 
+    # Full-screen screenshot
+    Key([], "print", lazy.spawn(
+    'maim /home/kapm/Screenshots/screenshot-$(date +\'%Y-%m-%d-%H%M%S\').png',
+    shell=True)),
+
+
     # Brightness
     Key([], brightup, lazy.spawn("brightnessctl set 10%+"), desc="Subir brillo"),
     Key([], brightdown, lazy.spawn("brightnessctl set 10%-"), desc="Bajar brillo"),
