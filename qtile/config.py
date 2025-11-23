@@ -138,7 +138,6 @@ keys = [
     'maim /home/kapm/Screenshots/screenshot-$(date +\'%Y-%m-%d-%H%M%S\').png',
     shell=True)),
 
-
     # Brightness
     Key([], brightup, lazy.spawn("brightnessctl set 10%+"), desc="Subir brillo"),
     Key([], brightdown, lazy.spawn("brightnessctl set 10%-"), desc="Bajar brillo"),
