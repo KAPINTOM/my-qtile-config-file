@@ -1,9 +1,6 @@
-# Documented Qtile configuration
-# Original uploaded file path: /mnt/data/config.py
-#
-# This is the fixed + documented version of your Qtile config.  Each section
-# below includes comments that explain purpose, common pitfalls, and what was
-# changed from the original uploaded file.
+# My Simple Qtile Config File
+# Made by Kenneth Andrey Pinto Medina
+# https://github.com/KAPINTOM
 
 import os
 import subprocess
