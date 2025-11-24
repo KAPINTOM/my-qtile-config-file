@@ -214,7 +214,7 @@ for i in groups:
 layouts = [
     layout.Columns(border_focus="#00a2ff", border_normal="#000000", border_width=3, margin=0),
     layout.Max(border_focus="#00a2ff", border_width=0, margin=0),
-    layout.Matrix(border_focus="#00a2ff", border_normal="#000000", border_width=3, margin=0),
+    # layout.Matrix(border_focus="#00a2ff", border_normal="#000000", border_width=3, margin=0),
 ]
 
 # =============================================
