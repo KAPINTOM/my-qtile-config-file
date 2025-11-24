@@ -138,7 +138,6 @@ keys = [
     'maim /home/kapm/Screenshots/screenshot-$(date +\'%Y-%m-%d-%H%M%S\').png',
     shell=True)),
 
-
     # Brightness
     Key([], brightup, lazy.spawn("brightnessctl set 10%+"), desc="Subir brillo"),
     Key([], brightdown, lazy.spawn("brightnessctl set 10%-"), desc="Bajar brillo"),
@@ -147,6 +146,11 @@ keys = [
     Key([], volup, lazy.spawn("amixer -D 'default:2' sset Headphone 5%+"), desc="Subir volumen"),
     Key([], voldown, lazy.spawn("amixer -D 'default:2' sset Headphone 5%-"), desc="Bajar volumen"),
     Key([], volmute, lazy.spawn("amixer -D 'default:2' sset Headphone toggle"), desc="Mute"),
+
+    # Media Playback Control
+    Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
+    Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
+    Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
 ]
 
 # =============================================
