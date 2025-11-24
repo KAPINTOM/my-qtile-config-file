@@ -26,11 +26,20 @@ terminal = "kitty"
 
 # Special multimedia keys. Keep these strings as-is — they are the X11/evdev
 # key names for brightness and audio keys and Qtile will map them for you.
+
+# Brightness keys
 brightup = "XF86MonBrightnessUp"
 brightdown = "XF86MonBrightnessDown"
+
+# Volume keys
 volup = "XF86AudioRaiseVolume"
 voldown = "XF86AudioLowerVolume"
 volmute = "XF86AudioMute"
+
+# Media playback keys
+playpause = "XF86AudioPlay"
+nexttrack = "XF86AudioNext"
+prevtrack = "XF86AudioPrev"
 
 # =============================================
 # COLOURS
@@ -148,9 +157,9 @@ keys = [
     Key([], volmute, lazy.spawn("amixer -D 'default:2' sset Headphone toggle"), desc="Mute"),
 
     # Media Playback Control
-    Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
-    Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
-    Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
+    Key([], playpause, lazy.spawn("playerctl play-pause")),
+    Key([], nexttrack, lazy.spawn("playerctl next")),
+    Key([], prevtrack, lazy.spawn("playerctl previous")),
 ]
 
 # =============================================
