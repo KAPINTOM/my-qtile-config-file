@@ -212,9 +212,13 @@ for i in groups:
 # Qtile version.
 
 layouts = [
-    layout.Columns(border_focus="#00a2ff", border_normal="#000000", border_width=3, margin=0),
-    layout.Max(border_focus="#00a2ff", border_width=0, margin=0),
+    
+    layout.Columns(border_focus="#00a2ff", border_normal="#000000", border_width=1, margin=2),
+
+    layout.Max(border_focus="#00a2ff", border_width=0, margin=0, only_focused=True),
+    
     # layout.Matrix(border_focus="#00a2ff", border_normal="#000000", border_width=3, margin=0),
+    
 ]
 
 # =============================================
@@ -240,8 +244,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.CurrentLayout(foreground=colors["primary"], padding=10),
-                widget.Sep(linewidth=0, padding=10, foreground=colors["gray"], background=colors["background"]),
-
+                
                 widget.GroupBox(
                     disable_drag=True,
                     highlight_method="block",
@@ -256,41 +259,56 @@ screens = [
                     padding_y=6,  # increased for vertical centering
                     borderwidth=0,
                 ),
+                
                 widget.Sep(linewidth=0, padding=10, foreground=colors["gray"], background=colors["background"]),
 
                 widget.WindowName(foreground=colors["primary"], padding=10),
+                
                 widget.Sep(linewidth=0, padding=10, foreground=colors["gray"], background=colors["background"]),
 
                 # System stats
                 widget.TextBox(text="CPU →", foreground=colors["success"], padding=0),
+                
                 widget.CPU(format="{load_percent:.0f}%", update_interval=2, foreground=colors["foreground"], padding=5),
+                
                 widget.Sep(linewidth=0, padding=5, foreground=colors["gray"], background=colors["background"]),
 
                 widget.TextBox(text="RAM →", foreground=colors["warning"], padding=0),
+                
                 widget.Memory(format="{MemPercent:.0f}%", measure_mem="G", update_interval=2, foreground=colors["foreground"], padding=5),
+                
                 widget.Sep(linewidth=0, padding=5, foreground=colors["gray"], background=colors["background"]),
 
                 widget.TextBox(text="NET →", foreground=colors["secondary"], padding=0),
+                
                 widget.Net(format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}", foreground=colors["foreground"], padding=5),
+                
                 widget.Sep(linewidth=0, padding=5, foreground=colors["gray"], background=colors["background"]),
 
                 widget.TextBox(text="VOL →", foreground=colors["primary"], padding=0),
+                
                 # Volume widget device/channel may need adjusting for your system.
                 widget.Volume(foreground=colors["foreground"], padding=5, device='default:2', channel='Headphone'),
+                
                 widget.Sep(linewidth=0, padding=5, foreground=colors["gray"], background=colors["background"]),
 
                 widget.TextBox(text="BAT →", foreground=colors["success"], padding=0),
+                
                 widget.Battery(format="{percent:.0%}", foreground=colors["foreground"], padding=5),
+                
                 widget.Sep(linewidth=0, padding=5, foreground=colors["gray"], background=colors["background"]),
 
                 widget.Systray(icon_size=16, padding=5),
+
                 widget.Sep(linewidth=0, padding=5, foreground=colors["gray"], background=colors["background"]),
 
-                widget.QuickExit(),
+                widget.QuickExit(default_text="[ ⏻ ] "),
 
                 widget.TextBox(text="TIME →", foreground=colors["warning"], padding=0),
+                
                 # Clock uses the user's timezone specified in the developer message
                 widget.Clock(format="%d/%m/%y %H:%M", timezone="America/Bogota", foreground=colors["foreground"], padding=5),
+                
                 widget.Sep(linewidth=0, padding=5, foreground=colors["gray"], background=colors["background"]),
             ],
             20,  # bar height in pixels
@@ -352,11 +370,14 @@ wl_xcursor_size = 24
 # wmname: sometimes set to help Java GUI apps that check for known window
 # managers. We attempt to include the qtile version if available but fall
 # back to a safe string to avoid exceptions during startup.
-try:
-    version = subprocess.run(['qtile', '--version'], capture_output=True, text=True, check=False).stdout.strip()
-    wmname = f"Qtile {version}" if version else "Qtile"
-except Exception:
-    wmname = "Qtile"
+
+#try:
+#    version = subprocess.run(['qtile', '--version'], capture_output=True, text=True, check=False).stdout.strip()
+#    wmname = f"Qtile {version}" if version else "Qtile"
+#except Exception:
+#    wmname = "Qtile"
+
+wmname = "LG3D"
 
 # End of documented config
 # ------------------------
