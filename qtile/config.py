@@ -213,7 +213,7 @@ for i in groups:
 
 layouts = [
     
-    layout.Columns(border_focus="#00a2ff", border_normal="#000000", border_width=1, margin=2),
+    layout.Columns(border_focus="#00a2ff", border_normal="#000000", border_width=1, margin=0),
 
     layout.Max(border_focus="#00a2ff", border_width=0, margin=0, only_focused=True),
     
@@ -229,7 +229,8 @@ layouts = [
 # custom widgets or distro-specific ones).
 
 widget_defaults = dict(
-    font="CaskaydiaCove Nerd Font Bold",
+    font="DejaVu Sans Condensed",
+    #font="CaskaydiaCove Nerd Font Bold",
     fontsize=15,
     padding=6,
     background=colors["background"],
@@ -311,7 +312,7 @@ screens = [
                 
                 widget.Sep(linewidth=0, padding=5, foreground=colors["gray"], background=colors["background"]),
             ],
-            20,  # bar height in pixels
+            18,  # bar height in pixels
             background=colors["background"],
             margin=[0, 0, 0, 0],
             opacity=1,
