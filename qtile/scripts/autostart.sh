@@ -4,7 +4,7 @@
 nitrogen --restore &
 nm-applet &
 dunst &
-thunar --daemon &
+#thunar --daemon &
 #pkill -f volumeicon
 #sleep 1
 #volumeicon &
