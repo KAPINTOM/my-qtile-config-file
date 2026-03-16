@@ -148,13 +148,16 @@ for i in groups:
 # LAYOUTS
 # =============================================
 
+# Using a single variable for margins to ensure consistency across layouts and bars
+margins = 5
+
 layouts = [
 
     layout.Columns(
         border_focus="#eb0bff",
         border_normal="#000000",
         border_width=1,
-        margin=10
+        margin=margins
     ),
 
     layout.Max(
@@ -170,7 +173,7 @@ layouts = [
 # =============================================
 
 widget_defaults = dict(
-    font="DejaVu Sans Condensed",
+    font="Cascadia Code",
     fontsize=15,
     padding=6,
     background=colors["background"],
@@ -183,7 +186,8 @@ extension_defaults = widget_defaults.copy()
 # BAR / SCREEN
 # =============================================
 
-gaps_value = 5
+# Using the same value for gaps and bar margin to create a consistent look
+gaps_value = margins
 
 screens = [
     Screen(
@@ -194,6 +198,13 @@ screens = [
 
         bottom=bar.Bar(
             [
+                widget.TextBox(text="TIME →", foreground=colors["warning"], padding=0),
+
+                widget.Clock(
+                    format="%d/%m/%y %H:%M",
+                    timezone="America/Bogota",
+                    padding=5
+                ),
 
                 widget.CurrentLayout(
                     foreground=colors["primary"],
@@ -276,17 +287,7 @@ screens = [
 
                 widget.Sep(linewidth=0, padding=5),
 
-                widget.QuickExit(default_text="[ ⏻ ] "),
-
-                widget.TextBox(text="TIME →", foreground=colors["warning"], padding=0),
-
-                widget.Clock(
-                    format="%d/%m/%y %H:%M",
-                    timezone="America/Bogota",
-                    padding=5
-                ),
-
-                widget.Sep(linewidth=0, padding=5),
+                widget.QuickExit(default_text="[ ⏻ ]"),
 
             ],
             22,
