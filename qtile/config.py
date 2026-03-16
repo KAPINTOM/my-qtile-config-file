@@ -9,6 +9,7 @@ from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from libqtile.bar import Gap
 
 # =============================================
 # MODIFIER AND TERMINAL
@@ -150,16 +151,16 @@ for i in groups:
 layouts = [
 
     layout.Columns(
-        border_focus="#56c1ff",
+        border_focus="#eb0bff",
         border_normal="#000000",
-        border_width=3,
-        margin=5
+        border_width=1,
+        margin=10
     ),
 
     layout.Max(
         border_focus="#008cff",
         border_width=0,
-        margin=5
+        margin=0
     ),
 
 ]
@@ -182,8 +183,15 @@ extension_defaults = widget_defaults.copy()
 # BAR / SCREEN
 # =============================================
 
+gaps_value = 5
+
 screens = [
     Screen(
+
+        left=Gap(gaps_value),
+        right=Gap(gaps_value),
+        top=Gap(gaps_value),
+
         bottom=bar.Bar(
             [
 
@@ -283,6 +291,7 @@ screens = [
             ],
             22,
             background=colors["background"],
+            margin=[gaps_value,0,0,0]
         ),
     ),
 ]
