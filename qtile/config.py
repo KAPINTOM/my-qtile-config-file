@@ -156,7 +156,7 @@ layouts = [
     layout.Columns(
         border_focus="#eb0bff",
         border_normal="#000000",
-        border_width=1,
+        border_width=0,
         margin=margins
     ),
 
@@ -175,7 +175,7 @@ layouts = [
 widget_defaults = dict(
     font="Cascadia Code",
     fontsize=15,
-    padding=6,
+    padding=5,
     background=colors["background"],
     foreground=colors["foreground"],
 )
@@ -198,7 +198,7 @@ screens = [
 
         bottom=bar.Bar(
             [
-                widget.TextBox(text="TIME →", foreground=colors["warning"], padding=0),
+                #widget.TextBox(text="TIME →", foreground=colors["warning"], padding=0),
 
                 widget.Clock(
                     format="%d/%m/%y %H:%M",
