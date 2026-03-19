@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#picom &
+picom &
 nitrogen --restore &
 nm-applet &
 dunst &
