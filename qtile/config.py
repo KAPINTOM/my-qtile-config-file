@@ -2,6 +2,8 @@
 # Made by Kenneth Andrey Pinto Medina
 # https://github.com/KAPINTOM
 
+# This configuration is designed to be simple, efficient, and visually appealing, with a focus on usability and aesthetics. It includes a clean bar with essential widgets, a consistent color scheme, and intuitive keybindings for managing windows and launching applications. The autostart function ensures that necessary applications and services are launched when Qtile starts, providing a seamless user experience from the moment you log in.
+
 import os
 import subprocess
 
@@ -65,7 +67,6 @@ def autostart():
 # =============================================
 
 keys = [
-
     # Focus
     Key([mod], "left", lazy.layout.left()),
     Key([mod], "right", lazy.layout.right()),
@@ -152,7 +153,6 @@ for i in groups:
 margins = 5
 
 layouts = [
-
     layout.Columns(
         border_focus="#eb0bff",
         border_normal="#000000",
@@ -165,7 +165,6 @@ layouts = [
         border_width=0,
         margin=0
     ),
-
 ]
 
 # =============================================
@@ -180,6 +179,7 @@ widget_defaults = dict(
     foreground=colors["foreground"],
 )
 
+# Using the same widget defaults for extension defaults to maintain a consistent look and feel across all widgets, ensuring that any new widgets added in the future will automatically inherit these settings for a cohesive appearance.
 extension_defaults = widget_defaults.copy()
 
 # =============================================
@@ -189,17 +189,22 @@ extension_defaults = widget_defaults.copy()
 # Using the same value for gaps and bar margin to create a consistent look
 gaps_value = margins
 
+# The bar is designed with consistent spacing and margins, using Gap widgets to create uniform gaps around the bar and between widgets, ensuring a cohesive and visually appealing layout.
 screens = [
     Screen(
 
+        # Using Gap widgets to create consistent spacing around the bar, ensuring a cohesive design with the defined margins
         left=Gap(gaps_value),
         right=Gap(gaps_value),
         top=Gap(gaps_value),
 
+        # Bar configuration with consistent margins and spacing between widgets, using the defined colors and widget settings for a cohesive appearance
         bottom=bar.Bar(
             [
-                #widget.TextBox(text="TIME →", foreground=colors["warning"], padding=0),
+                # Separators with zero linewidth and consistent padding to create uniform spacing between widgets
+                widget.Sep(linewidth=0, padding=15),
 
+                #widget.TextBox(text="TIME →", foreground=colors["warning"], padding=0),
                 widget.Clock(
                     format="%d/%m/%y %H:%M",
                     timezone="America/Bogota",
@@ -289,7 +294,10 @@ screens = [
 
                 widget.QuickExit(default_text="[ ⏻ ]"),
 
+                widget.Sep(linewidth=0, padding=15),
             ],
+
+            # Size of the bar is set to
             22,
             background=colors["background"],
             margin=[gaps_value,0,0,0]
@@ -331,11 +339,13 @@ floating_layout = layout.Floating(
 dgroups_key_binder = None
 dgroups_app_rules = []
 
+# Mouse focus settings
 follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
 
+# Focus on newly opened windows
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
