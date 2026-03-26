@@ -36,14 +36,14 @@ prevtrack = "XF86AudioPrev"
 # =============================================
 
 colors = {
-    "background": "#1a1a1a",
-    "foreground": "#ffffff",
-    "primary": "#5294e2",
-    "secondary": "#b16286",
-    "warning": "#d79921",
-    "error": "#cc241d",
-    "success": "#98971a",
-    "gray": "#3c3836",
+    "background":   "#1a1a1a",
+    "foreground":   "#ffffff",
+    "primary":      "#5294e2",
+    "secondary":    "#b16286",
+    "warning":      "#d79921",
+    "error":        "#cc241d",
+    "success":      "#98971a",
+    "gray":         "#3c3836",
 }
 
 # =============================================
@@ -150,9 +150,10 @@ for i in groups:
 # =============================================
 
 # Using a single variable for margins to ensure consistency across layouts and bars
-margins = 5
+margins = 3
 
 layouts = [
+    
     layout.Columns(
         border_focus="#eb0bff",
         border_normal="#000000",
@@ -196,10 +197,13 @@ screens = [
         # Using Gap widgets to create consistent spacing around the bar, ensuring a cohesive design with the defined margins
         left=Gap(gaps_value),
         right=Gap(gaps_value),
-        top=Gap(gaps_value),
+        #top=Gap(gaps_value),
+        bottom=Gap(gaps_value),
 
         # Bar configuration with consistent margins and spacing between widgets, using the defined colors and widget settings for a cohesive appearance
-        bottom=bar.Bar(
+        
+        top=bar.Bar(
+        #bottom=bar.Bar(
             [
                 # Separators with zero linewidth and consistent padding to create uniform spacing between widgets
                 widget.Sep(linewidth=0, padding=15),
@@ -224,18 +228,44 @@ screens = [
                     this_current_screen_border=colors["primary"],
                     other_current_screen_border=colors["gray"],
                     rounded=False,
-                    margin_x=6,
+                    
+                    margin_x=0,
                     margin_y=3,
-                    padding_x=6,
+                    
+                    padding_x=3,
                     padding_y=6,
+                    
                     borderwidth=0,
                 ),
 
-                widget.Sep(linewidth=0, padding=10),
+                #widget.Sep(linewidth=0, padding=10),
 
-                widget.WindowName(
-                    foreground=colors["primary"],
-                    padding=10
+                #widget.WindowName(
+                #    foreground=colors["primary"],
+                #    padding=10
+                #),
+
+                widget.TaskList(
+                    highlight_method="block",
+                    border=colors["primary"],
+
+                    txt_floating="[F] {}",
+                    txt_maximized="[M] {}",
+                    txt_minimized="[S] {}",
+                    
+                    #stretch=True,
+                    icon_size=22,
+                    #max_title_width=50,
+
+                    fontsize=12,
+
+                    margin_x=0,
+                    margin_y=0,
+
+                    padding_x=5,
+                    padding_y=5,
+                    
+                    borderwidth=0,
                 ),
 
                 widget.Sep(linewidth=0, padding=10),
@@ -300,7 +330,9 @@ screens = [
             # Size of the bar is set to
             22,
             background=colors["background"],
-            margin=[gaps_value,0,0,0]
+            # margin=[gaps_value,0,0,0]
+
+            margin=[0,0,gaps_value,0]
         ),
     ),
 ]
