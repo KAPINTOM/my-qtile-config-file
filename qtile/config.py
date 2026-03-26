@@ -39,6 +39,8 @@ colors = {
     "background":   "#1a1a1a",
     "foreground":   "#ffffff",
     "primary":      "#5294e2",
+    "light_primary":"#b2ebe6",
+    "dark_primary": "#0b5c8a",
     "secondary":    "#b16286",
     "warning":      "#d79921",
     "error":        "#cc241d",
@@ -66,6 +68,7 @@ def autostart():
 # KEYS
 # =============================================
 
+# The keybindings are designed to be intuitive and efficient, allowing users to quickly navigate between windows, move and resize them, and access essential functions like launching the terminal, managing layouts, and controlling media playback. The use of the mod key (Super/Windows key) in combination with directional keys for window management and specific keys for launching applications and controlling system functions ensures a smooth and productive workflow within the Qtile environment.
 keys = [
     # Focus
     Key([mod], "left", lazy.layout.left()),
@@ -150,14 +153,14 @@ for i in groups:
 # =============================================
 
 # Using a single variable for margins to ensure consistency across layouts and bars
-margins = 3
+margins = 0
+borders = 3
 
 layouts = [
-    
     layout.Columns(
-        border_focus="#eb0bff",
+        border_focus="#2a00e7",
         border_normal="#000000",
-        border_width=0,
+        border_width=borders,
         margin=margins
     ),
 
@@ -206,14 +209,61 @@ screens = [
         #bottom=bar.Bar(
             [
                 # Separators with zero linewidth and consistent padding to create uniform spacing between widgets
-                widget.Sep(linewidth=0, padding=15),
+                widget.Sep(linewidth=0, padding=5),
 
-                #widget.TextBox(text="TIME →", foreground=colors["warning"], padding=0),
-                widget.Clock(
-                    format="%d/%m/%y %H:%M",
-                    timezone="America/Bogota",
+                widget.QuickExit(default_text="[ ⏻ ]"),
+
+                widget.Systray(icon_size=16, padding=5),
+
+                widget.Sep(linewidth=0, padding=10),
+
+                widget.TextBox(text="CPU →", foreground=colors["success"], padding=0),
+
+                widget.CPU(
+                    format="{load_percent:.0f}%",
+                    update_interval=2,
                     padding=5
                 ),
+
+                widget.Sep(linewidth=0, padding=5),
+
+                widget.TextBox(text="RAM →", foreground=colors["warning"], padding=0),
+
+                widget.Memory(
+                    format="{MemPercent:.0f}%",
+                    update_interval=2,
+                    padding=5
+                ),
+
+                widget.Sep(linewidth=0, padding=5),
+
+                #widget.TextBox(text="NET →", foreground=colors["secondary"], padding=0),
+
+                #widget.Net(
+                #    format="{down:6.0f}{down_suffix} ↓↑ {up:6.0f}{up_suffix}",
+                #    padding=5
+                #),
+
+                widget.Sep(linewidth=0, padding=5),
+
+                widget.TextBox(text="VOL →", foreground=colors["primary"], padding=0),
+
+                widget.Volume(
+                    device='default',
+                    channel='Master',
+                    padding=5
+                ),
+
+                widget.Sep(linewidth=0, padding=5),
+
+                widget.TextBox(text="BAT →", foreground=colors["success"], padding=0),
+
+                widget.Battery(
+                    format="{percent:.0%}",
+                    padding=5
+                ),
+
+                widget.Sep(linewidth=0, padding=5),
 
                 widget.CurrentLayout(
                     foreground=colors["primary"],
@@ -244,10 +294,11 @@ screens = [
                 #    foreground=colors["primary"],
                 #    padding=10
                 #),
-
+                
+                # The TaskList widget is configured to display the current open windows with specific formatting for different window states (floating, maximized, minimized), using the defined color scheme and consistent padding to maintain a cohesive look across the bar.
                 widget.TaskList(
                     highlight_method="block",
-                    border=colors["primary"],
+                    border=colors["dark_primary"],
 
                     txt_floating="[F] {}",
                     txt_maximized="[M] {}",
@@ -263,72 +314,38 @@ screens = [
                     margin_y=0,
 
                     padding_x=5,
-                    padding_y=5,
+                    padding_y=9,
                     
                     borderwidth=0,
                 ),
 
+                #widget.TextBox(text="TIME →", foreground=colors["warning"], padding=0),
+                widget.Clock(
+                    format="%d/%m/%y %H:%M",
+                    timezone="America/Bogota",
+                    padding=5
+                ),
+
+
                 widget.Sep(linewidth=0, padding=10),
 
-                widget.TextBox(text="CPU →", foreground=colors["success"], padding=0),
-
-                widget.CPU(
-                    format="{load_percent:.0f}%",
-                    update_interval=2,
-                    padding=5
+                # The LaunchBar widget is configured with a set of programs and actions, including a shortcut to open the application launcher (Rofi) and quick actions for minimizing and closing the current window, all styled with the defined color scheme and consistent padding for a cohesive look.
+                widget.LaunchBar(
+                    progs=[
+                        ("APPS", "rofi -i -show drun -show-icons"),
+                        ("🔵", "qshell:self.qtile.current_window.toggle_minimize()"),
+                        ("🔴", "qshell:self.qtile.current_window.kill()"),
+                    ],
+                    foreground=colors["primary"],
+                    padding=2,
+                    fontsize=20,
                 ),
 
                 widget.Sep(linewidth=0, padding=5),
-
-                widget.TextBox(text="RAM →", foreground=colors["warning"], padding=0),
-
-                widget.Memory(
-                    format="{MemPercent:.0f}%",
-                    update_interval=2,
-                    padding=5
-                ),
-
-                widget.Sep(linewidth=0, padding=5),
-
-                widget.TextBox(text="NET →", foreground=colors["secondary"], padding=0),
-
-                widget.Net(
-                    format="{down:6.0f}{down_suffix} ↓↑ {up:6.0f}{up_suffix}",
-                    padding=5
-                ),
-
-                widget.Sep(linewidth=0, padding=5),
-
-                widget.TextBox(text="VOL →", foreground=colors["primary"], padding=0),
-
-                widget.Volume(
-                    device='default',
-                    channel='Master',
-                    padding=5
-                ),
-
-                widget.Sep(linewidth=0, padding=5),
-
-                widget.TextBox(text="BAT →", foreground=colors["success"], padding=0),
-
-                widget.Battery(
-                    format="{percent:.0%}",
-                    padding=5
-                ),
-
-                widget.Sep(linewidth=0, padding=5),
-
-                widget.Systray(icon_size=16, padding=5),
-
-                widget.Sep(linewidth=0, padding=5),
-
-                widget.QuickExit(default_text="[ ⏻ ]"),
-
-                widget.Sep(linewidth=0, padding=15),
             ],
 
             # Size of the bar is set to
-            22,
+            30,
             background=colors["background"],
             # margin=[gaps_value,0,0,0]
 
@@ -341,10 +358,11 @@ screens = [
 # MOUSE
 # =============================================
 
+# The mouse configuration allows for intuitive window management using drag and click actions, with the modifier key (mod) enabling users to easily move and resize floating windows, as well as bring them to the front with a simple click, enhancing the overall usability and efficiency of the window manager.
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
     Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
-    Click([mod], "Button2", lazy.window.bring_to_front()),
+    Click([mod], "Button1", lazy.window.bring_to_front()),
 ]
 
 # =============================================
@@ -352,6 +370,10 @@ mouse = [
 # =============================================
 
 floating_layout = layout.Floating(
+    border_width=10,
+    border_normal=colors["gray"],
+    border_focus=colors["dark_primary"],
+
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
