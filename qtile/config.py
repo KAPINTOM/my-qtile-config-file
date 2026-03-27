@@ -196,7 +196,6 @@ gaps_value = margins
 # The bar is designed with consistent spacing and margins, using Gap widgets to create uniform gaps around the bar and between widgets, ensuring a cohesive and visually appealing layout.
 screens = [
     Screen(
-
         # Using Gap widgets to create consistent spacing around the bar, ensuring a cohesive design with the defined margins
         #left=Gap(gaps_value),
         #right=Gap(gaps_value),
@@ -239,12 +238,13 @@ screens = [
                 ),
 
                 widget.TaskList(
+                    max_title_width=200,
                     highlight_method="block",
                     border=colors["dark_primary"],
 
                     txt_floating="[F] {}",
-                    txt_maximized="[M] {}",
-                    txt_minimized="[S] {}",
+                    txt_maximized="[] {}",
+                    txt_minimized="[M] {}",
                     
                     #stretch=True,
                     icon_size=22,
@@ -259,6 +259,7 @@ screens = [
                     padding_y=9,
                     
                     borderwidth=0,
+                    rounded=False,
                 ),
             ],
             30,
