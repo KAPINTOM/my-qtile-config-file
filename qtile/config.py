@@ -157,17 +157,17 @@ margins = 0
 borders = 3
 
 layouts = [
+    layout.Max(
+        border_focus="#008cff",
+        border_width=0,
+        margin=0
+    ),
+
     layout.Columns(
         border_focus="#2a00e7",
         border_normal="#000000",
         border_width=borders,
         margin=margins
-    ),
-
-    layout.Max(
-        border_focus="#008cff",
-        border_width=0,
-        margin=0
     ),
 ]
 
@@ -198,16 +198,88 @@ screens = [
     Screen(
 
         # Using Gap widgets to create consistent spacing around the bar, ensuring a cohesive design with the defined margins
-        left=Gap(gaps_value),
-        right=Gap(gaps_value),
+        #left=Gap(gaps_value),
+        #right=Gap(gaps_value),
         #top=Gap(gaps_value),
-        bottom=Gap(gaps_value),
+        #bottom=Gap(gaps_value),
 
         # Bar configuration with consistent margins and spacing between widgets, using the defined colors and widget settings for a cohesive appearance
         
-        top=bar.Bar(
+        left=bar.Bar(
+            [
+                #widget.GroupBox(
+                #    disable_drag=True,
+                #    highlight_method="block",
+                #    active=colors["foreground"],
+                #    inactive=colors["gray"],
+                #    this_current_screen_border=colors["primary"],
+                #    other_current_screen_border=colors["gray"],
+                #    rounded=False,
+                    
+                #    margin_x=0,
+                #    margin_y=3,
+                    
+                #    padding_x=3,
+                #    padding_y=6,
+                    
+                #    borderwidth=0,
+                #),
+
+                #widget.Sep(linewidth=0, padding=10),
+
+                #widget.WindowName(
+                #    foreground=colors["primary"],
+                #    padding=10
+                #),
+                
+                # The TaskList widget is configured to display the current open windows with specific formatting for different window states (floating, maximized, minimized), using the defined color scheme and consistent padding to maintain a cohesive look across the bar.
+                widget.CurrentLayout(
+                    foreground=colors["primary"],
+                    padding=10
+                ),
+
+                widget.TaskList(
+                    highlight_method="block",
+                    border=colors["dark_primary"],
+
+                    txt_floating="[F] {}",
+                    txt_maximized="[M] {}",
+                    txt_minimized="[S] {}",
+                    
+                    #stretch=True,
+                    icon_size=22,
+                    #max_title_width=50,
+
+                    fontsize=12,
+
+                    margin_x=0,
+                    margin_y=0,
+
+                    padding_x=5,
+                    padding_y=9,
+                    
+                    borderwidth=0,
+                ),
+            ],
+            30,
+            background=colors["background"],
+            # margin=[gaps_value,0,0,0]
+        ),
+
+        right=bar.Bar(
         #bottom=bar.Bar(
             [
+                widget.LaunchBar(
+                    progs=[
+                        ("🔴", "qshell:self.qtile.current_window.kill()"),
+                        ("🔵", "qshell:self.qtile.current_window.toggle_minimize()"),
+                        ("APPS", "rofi -i -show drun -show-icons"),
+                    ],
+                    foreground=colors["primary"],
+                    padding=2,
+                    fontsize=20,
+                ),
+
                 # Separators with zero linewidth and consistent padding to create uniform spacing between widgets
                 widget.Sep(linewidth=0, padding=5),
 
@@ -235,7 +307,7 @@ screens = [
                     padding=5
                 ),
 
-                widget.Sep(linewidth=0, padding=5),
+                #widget.Sep(linewidth=0, padding=5),
 
                 #widget.TextBox(text="NET →", foreground=colors["secondary"], padding=0),
 
@@ -244,15 +316,15 @@ screens = [
                 #    padding=5
                 #),
 
-                widget.Sep(linewidth=0, padding=5),
+                #widget.Sep(linewidth=0, padding=5),
 
-                widget.TextBox(text="VOL →", foreground=colors["primary"], padding=0),
+                #widget.TextBox(text="VOL →", foreground=colors["primary"], padding=0),
 
-                widget.Volume(
-                    device='default',
-                    channel='Master',
-                    padding=5
-                ),
+                #widget.Volume(
+                #    device='default',
+                #    channel='Master',
+                #    padding=0
+                #),
 
                 widget.Sep(linewidth=0, padding=5),
 
@@ -265,83 +337,18 @@ screens = [
 
                 widget.Sep(linewidth=0, padding=5),
 
-                widget.CurrentLayout(
-                    foreground=colors["primary"],
-                    padding=10
-                ),
-
-                widget.GroupBox(
-                    disable_drag=True,
-                    highlight_method="block",
-                    active=colors["foreground"],
-                    inactive=colors["gray"],
-                    this_current_screen_border=colors["primary"],
-                    other_current_screen_border=colors["gray"],
-                    rounded=False,
-                    
-                    margin_x=0,
-                    margin_y=3,
-                    
-                    padding_x=3,
-                    padding_y=6,
-                    
-                    borderwidth=0,
-                ),
-
-                #widget.Sep(linewidth=0, padding=10),
-
-                #widget.WindowName(
-                #    foreground=colors["primary"],
-                #    padding=10
-                #),
-                
-                # The TaskList widget is configured to display the current open windows with specific formatting for different window states (floating, maximized, minimized), using the defined color scheme and consistent padding to maintain a cohesive look across the bar.
-                widget.TaskList(
-                    highlight_method="block",
-                    border=colors["dark_primary"],
-
-                    txt_floating="[F] {}",
-                    txt_maximized="[M] {}",
-                    txt_minimized="[S] {}",
-                    
-                    #stretch=True,
-                    icon_size=22,
-                    #max_title_width=50,
-
-                    fontsize=12,
-
-                    margin_x=0,
-                    margin_y=0,
-
-                    padding_x=5,
-                    padding_y=9,
-                    
-                    borderwidth=0,
-                ),
-
                 #widget.TextBox(text="TIME →", foreground=colors["warning"], padding=0),
-                widget.Clock(
-                    format="%d/%m/%y %H:%M",
+                widget.VerticalClock(
+                    format=['%H', '%M', '', '%d', '%m', '%y'],
                     timezone="America/Bogota",
                     padding=5
                 ),
 
-
-                widget.Sep(linewidth=0, padding=10),
+                #widget.Sep(linewidth=0, padding=10),
 
                 # The LaunchBar widget is configured with a set of programs and actions, including a shortcut to open the application launcher (Rofi) and quick actions for minimizing and closing the current window, all styled with the defined color scheme and consistent padding for a cohesive look.
-                widget.LaunchBar(
-                    progs=[
-                        ("APPS", "rofi -i -show drun -show-icons"),
-                        ("🔵", "qshell:self.qtile.current_window.toggle_minimize()"),
-                        ("🔴", "qshell:self.qtile.current_window.kill()"),
-                    ],
-                    foreground=colors["primary"],
-                    padding=2,
-                    fontsize=20,
-                ),
-
-                widget.Sep(linewidth=0, padding=5),
+                
+                #widget.Sep(linewidth=0, padding=5),
             ],
 
             # Size of the bar is set to
