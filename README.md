@@ -272,12 +272,6 @@ Instead of adapting to traditional layouts, it redefines how space is used:
 
 ---
 
-# 📜 License
-
-MIT (or your preferred license)
-
----
-
 # 👤 Author
 
 Kenneth Andrey Pinto Medina
