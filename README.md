@@ -1,4 +1,4 @@
-# 🧠 Vertical-First Qtile Configuration
+# Vertical-First Qtile Configuration
 
 A minimalist, intentional, and productivity-focused Qtile configuration built around a **vertical-first interface philosophy**.
 
