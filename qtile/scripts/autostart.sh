@@ -1,10 +1,10 @@
 #!/bin/bash
 
-picom &
+#picom &
 nitrogen --restore &
 nm-applet &
 dunst &
 #thunar --daemon &
-#pkill -f volumeicon
-#sleep 1
-#volumeicon &
+pkill -f volumeicon
+sleep 1
+volumeicon &
