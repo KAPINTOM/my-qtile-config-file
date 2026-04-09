@@ -55,16 +55,19 @@ colors = {
 
 script_volumeicon = os.path.expanduser("~/.config/qtile/scripts/start-volumeicon.sh")
 
+
 @hook.subscribe.startup_once
 def autostart():
     script = os.path.expanduser("~/.config/qtile/scripts/autostart.sh")
     subprocess.call(["/bin/bash", script])
     subprocess.call(["/bin/bash", script_volumeicon])
-    
+
+
 @hook.subscribe.startup
 def run_every_startup():
     subprocess.call(["/bin/bash", script_volumeicon])
-    
+
+
 # =============================================
 # KEYS
 # =============================================
@@ -184,9 +187,9 @@ layouts = [
 # =============================================
 
 widget_defaults = dict(
-    font="Cascadia Code",
+    font="Adwaita Mono Bold",
     fontsize=15,
-    padding=5,
+    padding=0,
     background=colors["background"],
     foreground=colors["foreground"],
 )
@@ -217,6 +220,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.Clock(
+                    format=' %H:%M - %d/%m/%y',
                     padding=5,
                 ),
                 widget.GroupBox(highlight_method="block"),
@@ -229,13 +233,13 @@ screens = [
                     txt_maximized="[] {}",
                     txt_minimized="[M] {}",
                     # stretch=True,
-                    icon_size=22,
+                    icon_size=20,
                     # max_title_width=50,
                     fontsize=12,
                     margin_x=0,
                     margin_y=0,
                     padding_x=5,
-                    padding_y=5,
+                    padding_y=2 ,
                     borderwidth=0,
                     rounded=False,
                 ),
@@ -266,10 +270,12 @@ screens = [
                 ),
             ],
             # Size of the bar is set to
-            25,
+            20,
             background=colors["background"],
-            # margin=[gaps_value,0,0,0]
-            margin=[0, 0, gaps_value, 0],
+            
+            #margin=[gaps_value,0,0,0]
+            #margin=[0, 0, gaps_value, 0],
+            margin=[0,0,0,0],
         ),
     ),
 ]
