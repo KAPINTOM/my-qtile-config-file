@@ -7,11 +7,10 @@
 import os
 import subprocess
 
-from libqtile import bar, layout, qtile, widget, hook
+from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
-from libqtile.bar import Gap
+from libqtile.utils import send_notification
 
 # from layouts import layout_switcher
 
@@ -55,19 +54,18 @@ colors = {
 # =============================================
 
 
-@hook.subscribe.startup
+script_volumeicon = os.path.expanduser("~/.config/qtile/scripts/start-volumeicon.sh")
+
+@hook.subscribe.startup_once
 def autostart():
     script = os.path.expanduser("~/.config/qtile/scripts/autostart.sh")
-
-    if os.path.exists(script) and os.access(script, os.X_OK):
-        try:
-            subprocess.call([script])
-        except Exception:
-            subprocess.call(["/bin/bash", script])
-    elif os.path.exists(script):
-        subprocess.call(["/bin/bash", script])
-
-
+    subprocess.call(["/bin/bash", script])
+    subprocess.call(["/bin/bash", script_volumeicon])
+    
+@hook.subscribe.startup
+def run_every_startup():
+    subprocess.call(["/bin/bash", script_volumeicon])
+    
 # =============================================
 # KEYS
 # =============================================
@@ -222,8 +220,8 @@ screens = [
                 widget.Clock(
                     padding=5,
                 ),
-                widget.CurrentLayout(foreground=colors["primary"], padding=10),
                 widget.GroupBox(highlight_method="block"),
+                widget.CurrentLayout(foreground=colors["primary"], padding=10),
                 widget.TaskList(
                     max_title_width=200,
                     highlight_method="block",
