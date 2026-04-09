@@ -53,7 +53,6 @@ colors = {
 # AUTOSTART
 # =============================================
 
-
 script_volumeicon = os.path.expanduser("~/.config/qtile/scripts/start-volumeicon.sh")
 
 @hook.subscribe.startup_once
