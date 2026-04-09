@@ -2,9 +2,6 @@
 
 #picom &
 nitrogen --restore &
-nm-applet &
+#nm-applet &
 dunst &
 #thunar --daemon &
-pkill -f volumeicon
-sleep 1
-volumeicon &
