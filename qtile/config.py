@@ -170,16 +170,17 @@ for i in groups:
 
 # Using a single variable for margins to ensure consistency across layouts and bars
 margins = 0
-borders = 2
+borders = 5
 
 layouts = [
-    layout.Max(border_focus="#008cff", border_width=0, margin=0),
     layout.Columns(
         border_focus="#2a00e7",
         border_normal="#000000",
         border_width=borders,
         margin=margins,
     ),
+    layout.Max(border_focus="#008cff", border_width=0, margin=0),
+    
 ]
 
 # =============================================
@@ -202,7 +203,9 @@ extension_defaults = widget_defaults.copy()
 # =============================================
 
 # Using the same value for gaps and bar margin to create a consistent look
+
 gaps_value = margins
+gaps_value = 0
 
 # =============================================
 # LAYOUT SWITCHER
@@ -217,7 +220,7 @@ gaps_value = margins
 
 screens = [
     Screen(
-        top=bar.Bar(
+        bottom=bar.Bar(
             [
                 widget.Clock(
                     format=' %H:%M - %d/%m/%y',
@@ -246,15 +249,15 @@ screens = [
                 widget.QuickExit(default_text="[ ⏻ ]"),
                 widget.Systray(icon_size=16, padding=5),
                 widget.Sep(linewidth=0, padding=10),
-                widget.TextBox(text="CPU →", foreground=colors["success"], padding=0),
-                widget.CPU(format="{load_percent:.0f}%", update_interval=2, padding=5),
-                widget.Sep(linewidth=0, padding=5),
-                widget.TextBox(text="RAM →", foreground=colors["warning"], padding=0),
-                widget.Memory(format="{MemPercent:.0f}%", update_interval=2, padding=5),
-                widget.Sep(linewidth=0, padding=5),
-                widget.TextBox(text="BAT →", foreground=colors["success"], padding=0),
-                widget.Battery(format="{percent:.0%}", padding=5),
-                widget.Sep(linewidth=0, padding=5),
+                #widget.TextBox(text="CPU →", foreground=colors["success"], padding=0),
+                #widget.CPU(format="{load_percent:.0f}%", update_interval=2, padding=5),
+                #widget.Sep(linewidth=0, padding=5),
+                #widget.TextBox(text="RAM →", foreground=colors["warning"], padding=0),
+                #widget.Memory(format="{MemPercent:.0f}%", update_interval=2, padding=5),
+                #widget.Sep(linewidth=0, padding=5),
+                #widget.TextBox(text="BAT →", foreground=colors["success"], padding=0),
+                #widget.Battery(format="{percent:.0%}", padding=5),
+                #widget.Sep(linewidth=0, padding=5),
                 widget.TextBox(text="VOL →", foreground=colors["primary"], padding=0),
                 widget.Volume(device="default", channel="Master", padding=5),
                 widget.Sep(linewidth=0, padding=5),
