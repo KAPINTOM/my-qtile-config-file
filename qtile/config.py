@@ -101,19 +101,29 @@ keys = [
             ["bash", os.path.expanduser("~/.config/qtile/scripts/rofi-power-menu.sh")]
         ),
     ),
+    
     # Layout
+    
     Key([mod], "Tab", lazy.next_layout()),
+    
     # Window actions
+    
     Key([mod], "q", lazy.window.kill()),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod], "t", lazy.window.toggle_floating()),
+    
     # Qtile
+    
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
+    
     # Rofi
+    
     Key([mod], "e", lazy.spawn("rofi -i -show drun -show-icons")),
     Key([mod], "w", lazy.spawn("rofi -i -show window -show-icons")),
+    
     # Screenshot
+    
     Key(
         [],
         "Print",
@@ -122,18 +132,18 @@ keys = [
         ),
     ),
     
-# Brightness
+    # Brightness
     
     Key([], brightup, lazy.spawn("brightnessctl set 10%+")),
     Key([], brightdown, lazy.spawn("brightnessctl set 10%-")),
     
-# Volume
+    # Volume
     
     Key([], volup, lazy.spawn("amixer -c 2 sset Master 5%+")),
     Key([], voldown, lazy.spawn("amixer -c 2 sset Master 5%-")),
     Key([], volmute, lazy.spawn("amixer -c 2 sset Master toggle")),
     
-# Media
+    # Media
     
     Key([], playpause, lazy.spawn("playerctl play-pause")),
     Key([], nexttrack, lazy.spawn("playerctl next")),
