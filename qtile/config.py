@@ -121,14 +121,20 @@ keys = [
             "bash -c 'mkdir -p ~/Screenshots && maim ~/Screenshots/screenshot-$(date +%Y-%m-%d-%H%M%S).png'"
         ),
     ),
-    # Brightness
+    
+# Brightness
+    
     Key([], brightup, lazy.spawn("brightnessctl set 10%+")),
     Key([], brightdown, lazy.spawn("brightnessctl set 10%-")),
-    # Volume
-    Key([], volup, lazy.spawn("amixer sset Master 5%+")),
-    Key([], voldown, lazy.spawn("amixer sset Master 5%-")),
-    Key([], volmute, lazy.spawn("amixer sset Master toggle")),
-    # Media
+    
+# Volume
+    
+    Key([], volup, lazy.spawn("amixer -c 2 sset Master 5%+")),
+    Key([], voldown, lazy.spawn("amixer -c 2 sset Master 5%-")),
+    Key([], volmute, lazy.spawn("amixer -c 2 sset Master toggle")),
+    
+# Media
+    
     Key([], playpause, lazy.spawn("playerctl play-pause")),
     Key([], nexttrack, lazy.spawn("playerctl next")),
     Key([], prevtrack, lazy.spawn("playerctl previous")),
@@ -259,7 +265,7 @@ screens = [
                 #widget.Battery(format="{percent:.0%}", padding=5),
                 #widget.Sep(linewidth=0, padding=5),
                 widget.TextBox(text="VOL →", foreground=colors["primary"], padding=0),
-                widget.Volume(device="default", channel="Master", padding=5),
+                widget.Volume(device="default:2", channel="Master", padding=5),
                 widget.Sep(linewidth=0, padding=5),
                 widget.LaunchBar(
                     progs=[
